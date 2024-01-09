@@ -29,8 +29,13 @@ $logout = function (Logout $logout) {
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')" wire:navigate>
-                        {{ __('Users') }}
+                    <x-nav-link :href="route('manage-users')" :active="request()->routeIs('manage-users')" wire:navigate>
+                        {{ __('Manage Users') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manage-tools')" :active="request()->routeIs('manage-tools')" wire:navigate>
+                        {{ __('Manage Tools') }}
                     </x-nav-link>
                 </div>
             </div>
