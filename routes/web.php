@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Route::view('/', 'welcome');
-Route::get('/', [CategoryController::class, 'index'])->name('categories');
+Route::get('/', [CategoryController::class, 'index'])->name('categories')->middleware(['auth', 'verified']);
 Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('category');
 Route::get('tool/{tool:slug}', [ToolController::class, 'show'])->middleware(['auth', 'verified'])->name('tool');
 

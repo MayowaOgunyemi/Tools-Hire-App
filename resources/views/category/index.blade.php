@@ -11,9 +11,9 @@
                 <div class="flex gap-5 ">
                     @forelse ($categories as $category)
                     <a href="{{ route('category', ['category' => $category->slug]) }}">
-                    <div class="flex flex-col text-white font-semibold bg-gray-700 hover:bg-gray-800 cursor-pointer rounded-2xl py-2 justify-center items-center">
-                        <li class="text-lg">{{ $category->name }}</li>
-                        <img src="{{ asset('img/rocket.png') }}" class="w-fit" alt="{{ $category->description }}">
+                    <div class="flex flex-col text-gray-600 font-semibold bg-white hover:shadow-md cursor-pointer rounded-2xl px-4 py-2 justify-center items-center w-80 h-80">
+                        <img src="https://ui-avatars.com/api/?name={{ $category->name }}')" class="w-40 rounded-lg bg-slate-500" alt="{{ $category->description }}">
+                        <li class="text-lg mt-2">{{ $category->name }}</li>
                     </div>
                     </a>
                     @empty

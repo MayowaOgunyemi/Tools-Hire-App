@@ -11,8 +11,9 @@
                 <div class="flex gap-5 ">
                     @forelse ($tools as $tool)
                     <a href="{{ route('tool', ['tool' => $tool->slug]) }}">
-                    <div class="flex flex-col text-gray-600 font-semibold bg-white hover:bg-gray-200 cursor-pointer rounded-2xl px-4 py-2 justify-center items-center">
-                        <img src="{{ $tool->getFirstMediaUrl('tools') }}" class="w-40 mb-2" alt="{{ $tool->name }}">
+                    <div class="flex flex-col text-gray-600 font-semibold bg-white hover:bg-gray-200 cursor-pointer rounded-2xl px-4 py-2 justify-center items-center w-80 h-80">
+                        <img src="{{ $tool->getFirstMediaUrl('tools') ? $tool->getFirstMediaUrl('tools') : asset('img/placeholder.svg') }}" class="w-40 mb-2" alt="{{ $tool->name }}">
+                        <p class="bg-[#b8b5b5]"></p>
                         <li class="text-2xl">{{ $tool->name }}</li>
                         <li class="text-lg">€{{ $tool->cost }}</li>
                         <div class="flex items-center mt-1">

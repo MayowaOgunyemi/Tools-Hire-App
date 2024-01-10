@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('tools', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id');
-            $table->foreignId('user_id');
+            $table->foreignId('category_id')
+                ->references('id')
+                ->on('categories')
+                ->constrained('categories');
+            $table->foreignId('user_id')
+                ->references('id')
+                ->on('users')
+                ->constrained('users');
             $table->string('name', 250);
             $table->string('slug', 250);
             $table->string('cost', 250);
