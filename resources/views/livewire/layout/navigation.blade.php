@@ -38,6 +38,16 @@ $logout = function (Logout $logout) {
                         {{ __('Manage Tools') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manage-reviews')" :active="request()->routeIs('manage-reviews')" wire:navigate>
+                        {{ __('Manage Reviews') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manage-replies')" :active="request()->routeIs('manage-replies')" wire:navigate>
+                        {{ __('Manage Replies') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

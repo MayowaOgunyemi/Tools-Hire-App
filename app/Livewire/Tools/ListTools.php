@@ -10,6 +10,7 @@ use Filament\Tables\Table;
 use Filament\Tables\Actions\Action;
 use Illuminate\Contracts\View\View;
 use Filament\Forms\Components\Select;
+use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\Textarea;
@@ -83,7 +84,6 @@ class ListTools extends Component implements HasForms, HasTable
                             ->multiple()
                             ->imagePreviewHeight('50')
                             ->image()
-                            // ->visibility('private')
                             ->reorderable()
                             ->maxSize(8048),
 
@@ -127,53 +127,55 @@ class ListTools extends Component implements HasForms, HasTable
                 //
             ])
             ->actions([
-                // Action::make('edit')->color('primary')
-                // ->tooltip('Edit')->icon('heroicon-s-pencil-square')->label("")->size('md')
-                // ->mountUsing(fn (ComponentContainer $form, Trades $record) => $form->fill([
-                //     'amount' => $record->amount,
-                //     'cardId' => $record->giftcard->id,
-                //     'categoryId' => $record->giftcardcategory->id,
-                //     'type' => $record->giftcardcategory->type,
-                //     'fx' => $record->fx_value,
-                //     'rate' => $record->giftcardcategory->rate,
-                // ]))->modalHeading('Edit Transaction')->modalSubmitActionLabel('Update transaction')
-                // ->color('info')
-                // ->action(fn ($record,  array $data) => $this->editTrade($record, $data))
-                // ->form([
-                //     Grid::make(2)
-                //         ->schema([
-                //             TextInput::make('amount')->label('Naira Amount')->required()->numeric(),
-                //             TextInput::make('fx')->label('FX Value')->numeric()
-                //                 ->reactive()
-                //                 ->afterStateUpdated(fn (callable $set, $get) => $set('amount', (int) $get('rate') * (int) $get('fx'))),
-                //         ]),
-                //     Grid::make(2)
-                //         ->schema([
-                //             Select::make('cardId')
-                //                 ->label('Card')
-                //                 ->options(Cards::all()->pluck('name', 'id'))
-                //                 ->searchable()
-                //                 ->required()
-                //                 ->reactive()
-                //                 ->afterStateUpdated(fn (callable $set) => $set('categoryId', null)),
-                //             Select::make('categoryId')
-                //                 ->label('Category')
-                //                 ->options(function (callable $get) {
-                //                     $card = Cards::find($get('cardId'));
-                //                     if (!$card) {
-                //                         return CardCategory::all()->pluck('name', 'id');
-                //                     }
-                //                     return $card->sub->pluck('name', 'id');
-                //                 })
-                //                 ->reactive()
-                //                 ->afterStateUpdated(function (Closure $set, callable $get, $state) {
-                //                     $set('rate', CardCategory::find($state)->rate);
-                //                     $set('amount', $get('rate') * $get('fx'));
-                //                 })
-                //                 ->searchable()
-                //                 ->required(),
-                //         ]),
-                // ]),
+                Action::make('edit')->color('primary')
+                ->tooltip('Edit')->icon('heroicon-s-pencil-square')->label("")->size('md')
+                ->mountUsing(fn (ComponentContainer $form, Tool $record) => $form->fill([
+                    'name' => $record->name,
+                    'category_id' => $record->category_id,
+                    'cost' => $record->cost,
+                    'description' => $record->description,
+                ]))
+                ->modalHeading('Edit Tool')->modalSubmitActionLabel('Update')
+                ->color('info')
+                ->action(fn ($record,  array $data) => $this->editTool($record, $data))
+                ->form([
+                    SpatieMediaLibraryFileUpload::make('attachment')->collection('tools')->label('Upload Tool Images')
+                            ->disk('public')
+                            ->multiple()
+                            ->imagePreviewHeight('50')
+                            ->image()
+                            ->reorderable()
+                            ->maxSize(8048),
+
+                        Section::make()
+                            ->columns([
+                                'sm' => 1,
+                                'xl' => 2,
+                            ])
+                            ->schema([
+                                TextInput::make('name')
+                                    ->label('Tool Name')
+                                    ->placeholder('Hand tool')
+                                    ->required()
+                                    ->maxLength(100)
+                                    ->columnSpan([
+                                        'sm' => 2,
+                                        'xl' => 2,
+                                    ]),
+                                Select::make('category_id')
+                                    ->label('Category')
+                                    ->options(Category::all()->pluck('name', 'id'))->required()
+                                    ->searchable(),
+                                TextInput::make('cost')->label('Cost')->numeric()->required()->maxLength(50),
+                                Textarea::make('description')->required()
+                                    ->placeholder('Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum odio impedit non, incidunt iste velit id laboriosam enim assumenda dignissimos cum consectetur nostrum qui soluta, vero dicta fugiat, ullam adipisci!')
+                                    ->required()
+                                    ->maxLength(250)->columnSpan([
+                                        'sm' => 2,
+                                        'xl' => 2,
+                                    ]),
+                            ]),
+                   ]),
 
             Action::make('approve')
                     ->color('success')
@@ -200,16 +202,19 @@ class ListTools extends Component implements HasForms, HasTable
             ]);
     }
 
-    // protected function editTrade(Trades $record, $data)
-    // {
-    //     $record->update([
-    //         'amount' => $data['amount'],
-    //         'cardcategory_id' => $data['categoryId'],
-    //         'card_id' => $data['cardId'],
-    //         'fx_value' => $data['fx'],
+    protected function editTool(Tool $record, $data)
+    {
+        
+        $record->update([
+            'name' => $data['name'],
+            'category_id' => $data['category_id'],
+            'cost' => $data['cost'],
+            'description' => $data['description'],
 
-    //     ]);
-    // }
+        ]);
+
+        
+    }
 
     public function render(): View
     {

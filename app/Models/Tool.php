@@ -36,14 +36,39 @@ class Tool extends Model implements HasMedia
     {
         return $this->hasMany(Rating::class);
     }
+    
+    public function reviews()
+    {
+        return $this->hasMany(Review::class)->where('is_approved', true);
+    }
 
     public function averageRating()
     {
-        $ratings = $this->ratings()->pluck('rating')->toArray();
-        if (count($ratings) === 0) {
+        $reviews = $this->reviews()->get();
+
+        if ($reviews->isEmpty()) {
             return 0;
         }
-        $average = array_sum($ratings) / count($ratings);
+
+        $totalRating = $reviews->sum(function ($review) {
+            return ($review->performance_rating +
+                    $review->customer_service_rating +
+                    $review->support_rating +
+                    $review->after_sales_support_rating +
+                    ($review->miscellaneous_rating ?? 0));
+        });
+
+        $average = $totalRating / ($reviews->count() * 5); // Assuming ratings are out of 5 for each category
         return round($average, 1);
     }
+
+    // public function averageRating()
+    // {
+    //     $ratings = $this->ratings()->pluck('rating')->toArray();
+    //     if (count($ratings) === 0) {
+    //         return 0;
+    //     }
+    //     $average = array_sum($ratings) / count($ratings);
+    //     return round($average, 1);
+    // }
 }

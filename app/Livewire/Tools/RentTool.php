@@ -26,12 +26,8 @@ class RentTool extends Component
     }
    
     public function updatedEndDate($date){
-        dd(Carbon::parse($this->startDate)->diffInDays(Carbon::parse($this->endDate)));
-        if($this->endDate < $this->startDate){
-            dd('invalid');
-        }
-        dd('valid');
-        dd($date);
+        // dd(Carbon::parse($this->startDate)->diffInDays(Carbon::parse($this->endDate)));
+        
     }
 
     public function createOrder(){

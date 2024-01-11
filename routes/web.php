@@ -24,6 +24,8 @@ Route::get('tool/{tool:slug}', [ToolController::class, 'show'])->middleware(['au
 
 Route::get('/manage/tools', [AdminController::class, 'listTools'])->middleware(['auth', 'verified'])->name('manage-tools');
 Route::get('/manage/users', [AdminController::class, 'listUsers'])->middleware(['auth', 'verified'])->name('manage-users');
+Route::get('/manage/reviews', [AdminController::class, 'listReviews'])->middleware(['auth', 'verified'])->name('manage-reviews');
+Route::get('/manage/replies', [AdminController::class, 'listReplies'])->middleware(['auth', 'verified'])->name('manage-replies');
 
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
