@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CategorySeeder::class,
             ToolSeeder::class,
-            ReviewSeeder::class,
+            // ReviewSeeder::class,
         ]);
 
         // \App\Models\User::factory()->create([

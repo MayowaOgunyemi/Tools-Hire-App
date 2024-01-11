@@ -21,12 +21,10 @@ class ReviewSeeder extends Seeder
         Review::create([
             'user_id' => $user->id,
             'tool_id' => $toolService->id,
-            'rating' => 4,
             'performance_rating' => 4,
             'customer_service_rating' => 5,
             'support_rating' => 4,
             'after_sales_support_rating' => 3,
-            'miscellaneous_rating' => 4,
             'comment' => 'Great tool, highly recommended!',
             'is_approved' => true,
         ]);

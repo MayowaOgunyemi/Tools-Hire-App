@@ -30,14 +30,11 @@ class AddReviewForm extends Component
 
     public function submitReview()
     {
-        // dd($this);
-        $validatedData = $this->validate([
-            // 'rating' => 'required|integer|min:1|max:5',
+        $this->validate([
             'performanceRating' => 'required|integer|min:1|max:5',
             'customerServiceRating' => 'required|integer|min:1|max:5',
             'supportRating' => 'required|integer|min:1|max:5',
             'afterSalesSupportRating' => 'required|integer|min:1|max:5',
-            // 'miscellaneousRating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string',
         ]);
 

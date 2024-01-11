@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('tool_id');
-            $table->integer('rating')->nullable();
             $table->integer('performance_rating');
             $table->integer('customer_service_rating');
             $table->integer('support_rating');
