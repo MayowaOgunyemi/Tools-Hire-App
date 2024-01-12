@@ -7,11 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
-            
-            <div class="grid grid-cols-2 gap-5">
-                <div class="bg-white rounded-md h-auto ">
-                    <div class="flex gap-5 min-w-max">
+            <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white dark:bg-gray-700 rounded-md h-auto ">
+                    <div class="flex justify-center items-center gap-5">
                         @forelse ($tool->getMedia('tools') as $image)
                         <img src="{{ $image->getFullUrl() }}" class="w-40 object-contain" alt="..." />
                         @empty
@@ -19,19 +17,19 @@
                         @endforelse
                     </div>
                 </div>
-                <div class="bg-white rounded-md p-4">
+                <div class="bg-white dark:bg-gray-700 rounded-md p-4">
                     <x-tool-rating :rating="$tool->averageRating()" />
                     @livewire('tools.rent-tool', ['tool' => $tool])
                 </div>
             </div>
 
-            <div class="bg-white rounded-md h-auto text-gray-600  grid grid-cols-2 p-4">
-                <div class="flex flex-col items-center">
+            <div class=" text-gray-600 grid grid-cols-2 gap-2 p-4">
+                <div class="bg-white dark:bg-gray-700 dark:text-gray-100 rounded-md flex flex-col items-center p-4">
                     <span class="text-2xl font-bold">{{ $tool->averageRating() }}/5</span>
                     <x-tool-rating :rating="$tool->averageRating()" />
                 </div>
 
-                <div class="flex flex-col gap-4">
+                <div class="bg-white dark:bg-gray-700 rounded-md flex flex-col gap-4 p-4">
                     <div>
                         <livewire:add-review-form :tool="$tool" />
                     </div>
@@ -87,7 +85,7 @@
                             </div>
                     </div>
                     @empty
-                    <span>No reviews yet...</span>
+                    <span class="dark:text-gray-400">No reviews yet...</span>
                     @endforelse
                     {{-- <div>
                         <livewire:add-review-form :tool="$tool" />

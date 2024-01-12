@@ -9,11 +9,17 @@ class AdminController extends Controller
 {
     public function listTools()
     {
+        if(auth()->user()->role != 'admin' && auth()->user()->role != 'moderator'){
+            return abort(403, 'Unauthorized action.');
+        }
         return view('admin.manage-tools');
     }
 
     public function listUsers()
     {
+        if(auth()->user()->role != 'admin'){
+            return abort(403, 'Unauthorized action.');
+        }
         return view('admin.manage-users');
     }
 
@@ -24,6 +30,14 @@ class AdminController extends Controller
 
     public function listReplies()
     {
+        return view('admin.manage-replies');
+    }
+    
+    public function listRentals()
+    {
+        if(auth()->user()->role != 'admin'){
+            return abort(403, 'Unauthorized action.');
+        }
         return view('admin.manage-replies');
     }
 

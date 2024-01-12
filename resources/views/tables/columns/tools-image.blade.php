@@ -12,7 +12,7 @@
     <img class="w-10 h-10 object-cover rounded-full cursor-pointer" data-fancybox='{{ $name ?? 'image' }}'
     src="{{ $image ? $image->getFullUrl() : asset('images/default/gift-card.png')}}" alt="{{ $name ?? 'image' }}" loading="lazy" />
     @empty
-    <span>N/A</span>
+    <span class="text-gray-100">N/A</span>
     {{-- <img class="w-8 h-8 rounded-md" src="{{ asset('images/default/gift-card.png')}}" alt="{{ $name ?? 'image' }}" loading="lazy" /> --}}
     @endforelse
 </div>

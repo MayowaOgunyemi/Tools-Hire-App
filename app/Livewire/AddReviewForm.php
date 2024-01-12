@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Review;
 use Livewire\Component;
+use Filament\Notifications\Notification;
 
 class AddReviewForm extends Component
 {
@@ -15,8 +16,6 @@ class AddReviewForm extends Component
     public $afterSalesSupportRating;
     public $miscellaneousRating;
     public $comment, $fddffdd;
-
-    protected $listeners = ['refresh' => '$refresh'];
 
     public function render()
     {
@@ -41,24 +40,24 @@ class AddReviewForm extends Component
         $review = new Review([
             'user_id' => auth()->id(),
             'tool_id' => $this->tool->id,
-            'rating' => 0,
             'performance_rating' => $this->performanceRating,
             'customer_service_rating' => $this->customerServiceRating,
             'support_rating' => $this->supportRating,
             'after_sales_support_rating' => $this->afterSalesSupportRating,
-            'miscellaneous_rating' => 0,
             'comment' => $this->comment ?? 'N/A',
-            // 'is_approved' => false,
         ]);
 
         if($review->save()){
-            // dd('true');
-        }
-
-        // Clear form fields after submission
         $this->reset(['rating', 'performanceRating', 'customerServiceRating', 'supportRating', 'afterSalesSupportRating', 'miscellaneousRating', 'comment']);
 
-        // Emit an event to notify parent component or refresh the page
-        $this->dispatch('refresh');
+            Notification::make()
+            ->title('Review added')
+            ->body('We have received your review successfully.')
+            ->success()
+            ->send();
+
+        return redirect(url('/').'/tool/'.$this->tool->slug);
+
+        }
     }
 }

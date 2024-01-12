@@ -11,14 +11,15 @@
                 <div class="flex gap-5 ">
                     @forelse ($categories as $category)
                     <a href="{{ route('category', ['category' => $category->slug]) }}">
-                    <div class="flex flex-col text-gray-600 font-semibold bg-white hover:shadow-md cursor-pointer rounded-2xl px-4 py-2 justify-center items-center w-80 h-80">
-                        <img src="https://ui-avatars.com/api/?name={{ $category->name }}')" class="w-40 rounded-lg bg-slate-500" alt="{{ $category->description }}">
-                        <li class="text-lg mt-2">{{ $category->name }}</li>
+                    <div class="flex flex-col text-gray-600 font-semibold bg-white dark:bg-gray-700 hover:shadow-md cursor-pointer rounded-2xl px-4 py-2 justify-center items-center w-80 h-80">
+                        <img src="https://ui-avatars.com/api/?name={{ $category->name }}')" class="w-40 rounded-lg  dark:bg-gray-800" alt="{{ $category->description }}">
+                        <li class="text-lg mt-2 dark:text-gray-100">{{ $category->name }}</li>
                     </div>
                     </a>
                     @empty
-                    <li>No categories yet...</li>
+                    <li class="text-gray-100">No categories yet...</li>
                     @endforelse
+                </div>
             </ul>
         </div>
     </div>

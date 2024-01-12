@@ -1,7 +1,7 @@
-<div>
+<div class="dark:text-gray-100">
     <h2 class="font-bold text-2xl">{{$tool->name}}</h2>
     <div class="flex flex-col mt-2 text-gray-700">
-        <p class="text-lg font-bold">€{{$tool->cost}} <span class="font-normal">(per day)</span></p>
+        <p class="text-lg font-bold dark:text-gray-100">€{{$tool->cost}} <span class="font-normal">(per day)</span></p>
         <form wire:submit="createOrder">
             <div class="grid grid-cols-2 gap-5 my-4">
                 <div>
@@ -15,15 +15,14 @@
                     <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
                 </div>
             </div>
+            <button type="submit" class="px-3 py-2 rounded-md my-3 bg-blue-700 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 font-semibold hover:bg-blue-600">
+                Rent Tool
+            </button>
 
-
-            <x-primary-button class="my-3 bg-blue-700 hover:bg-blue-600">
-                {{ __('Rent') }}
-            </x-primary-button>
 
         </form>
-        <span class="text-gray-800 font-medium">Description:</span>
-        <p>{{ $tool->description }}</p>
+        <span class="text-gray-800 dark:text-gray-100 font-medium">Description:</span>
+        <p class="dark:text-gray-300 ">{{ $tool->description }}</p>
 
     </div>
 </div>

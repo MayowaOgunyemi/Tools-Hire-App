@@ -71,7 +71,7 @@ class ListTools extends Component implements HasForms, HasTable
             ->headerActions([
                 CreateAction::make('createTool')
                     ->label('Create Tool')
-                    // ->visible(fn () => auth()->user()->openTickets()->count() == 0)
+                    ->visible(fn () => auth()->user()->role == 'admin')
                     ->color('success')
                     ->icon('heroicon-m-plus')
                     ->successNotificationTitle('Tool Created')
@@ -128,7 +128,7 @@ class ListTools extends Component implements HasForms, HasTable
             ])
             ->actions([
                 Action::make('edit')->color('primary')
-                ->tooltip('Edit')->icon('heroicon-s-pencil-square')->label("")->size('md')
+                ->tooltip('Edit')->icon('heroicon-s-pencil-square')->size('md')
                 ->mountUsing(fn (ComponentContainer $form, Tool $record) => $form->fill([
                     'name' => $record->name,
                     'category_id' => $record->category_id,
@@ -182,7 +182,7 @@ class ListTools extends Component implements HasForms, HasTable
                     ->icon('heroicon-m-check')
                     ->requiresConfirmation()
                     ->visible(fn (Tool $record) => $record->status == 0)
-                    ->action(fn (Tool $record) => $record->update(['status' => 1])),
+                    ->action(fn (Tool $record) => $record->update(['is_approved' => 1])),
                 Action::make('reject')
                     ->color('danger')
                     ->icon('heroicon-m-x-mark')

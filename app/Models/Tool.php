@@ -36,6 +36,16 @@ class Tool extends Model implements HasMedia
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function isRentedByUser()
+    {
+        return $this->rentals()->where('user_id', auth()->id())->where('is_approved', true)->exists();
+    }
+    
+    public function rentals()
+    {
+        return $this->hasMany(ToolsRental::class);
+    }
     
     public function reviews()
     {

@@ -1,9 +1,12 @@
 <div>
+    @if ($tool->isRentedByUser())
+        
     <button type="button" x-on:click.prevent="$dispatch('open-modal', 'rate-tool')" class="bg-blue-600 font-medium hover:bg-blue-500 text-white px-2 py-1 rounded-md w-full">Add Review</button>
+    @endif
 
     <x-modal name="rate-tool" :show="$errors->isNotEmpty()" focusable>
 
-        <div class="bg-white p-8 rounded shadow-lg">
+        <div class="bg-white dark:text-gray-100 dark:bg-gray-700 p-8 rounded shadow-lg">
             <h2 class="text-2xl font-bold mb-4">Add Review</h2>
 
             <form wire:submit.prevent="submitReview">
