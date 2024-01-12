@@ -11,5 +11,5 @@
             </svg>
         @endif
     @endfor
-    <span class="ml-2 font-bold">({{$rating}})</span>
+    <span class="ml-2 font-bold dark:text-gray-100">({{$rating}})</span>
 </div>

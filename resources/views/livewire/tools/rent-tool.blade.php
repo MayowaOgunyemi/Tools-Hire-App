@@ -15,7 +15,7 @@
                     <x-input-error :messages="$errors->get('endDate')" class="mt-2" />
                 </div>
             </div>
-            <button type="submit" class="px-3 py-2 rounded-md my-3 bg-blue-700 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 font-semibold hover:bg-blue-600">
+            <button type="submit" class="px-3 text-white py-2 rounded-md my-3 bg-blue-700 dark:bg-gray-900 dark:text-gray-50 dark:hover:bg-gray-800 font-semibold hover:bg-blue-600">
                 Rent Tool
             </button>
 

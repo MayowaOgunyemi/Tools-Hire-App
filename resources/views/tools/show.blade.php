@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-2">
             <div class="grid grid-cols-2 gap-2">
                 <div class="bg-white dark:bg-gray-700 rounded-md h-auto ">
                     <div class="flex justify-center items-center gap-5">
@@ -23,21 +23,21 @@
                 </div>
             </div>
 
-            <div class=" text-gray-600 grid grid-cols-2 gap-2 p-4">
+            <div class=" text-gray-600 grid grid-cols-2 gap-2">
                 <div class="bg-white dark:bg-gray-700 dark:text-gray-100 rounded-md flex flex-col items-center p-4">
                     <span class="text-2xl font-bold">{{ $tool->averageRating() }}/5</span>
                     <x-tool-rating :rating="$tool->averageRating()" />
                 </div>
 
-                <div class="bg-white dark:bg-gray-700 rounded-md flex flex-col gap-4 p-4">
+                <div class="bg-white dark:bg-gray-700 dark:text-gray-100 rounded-md flex flex-col gap-4 p-4">
                     <div>
                         <livewire:add-review-form :tool="$tool" />
                     </div>
                     @forelse ($tool->reviews->take(7) as $review)
-                    <div class="grid grid-cols-2 justify-between items-start bg-gray-200 px-4 py-2 rounded-md">
+                    <div class="grid grid-cols-2 justify-between items-start bg-gray-200 dark:bg-gray-800 px-4 py-2 rounded-md">
                     
                         <div>
-                            <p class="text-gray-800 font-semibold">{{ $tool->user->name }}</p>
+                            <p class="text-gray-800 dark:text-gray-100 font-semibold">{{ $tool->user->name }}</p>
                             <p>{{ $review->comment }}</p>
 
                             
@@ -67,12 +67,12 @@
                         </div>
                         @livewire('reply-form', ['review' => $review->id] )
 
-                            <div class="px-5 bg-gray-100 py-2 mt-2 w-full col-span-2">
+                            <div class="px-5 bg-gray-100 dark:bg-gray-700 opacity-60 py-1 rounded-sm mt-2 w-full col-span-2">
                                 {{-- <h3>Replies:</h3> --}}
                                 @forelse ($review->replies as $reply)
                                     <div class="flex justify-between items-center space-y-3">
                                         <div>
-                                        <p class="text-gray-800 font-semibold">{{ $reply->user->name }}</p>
+                                        <p class="text-gray-800 dark:text-gray-100 font-semibold">{{ $reply->user->name }}</p>
                                         </div>
                                         <div class="flex flex-col">
                                         <p >{{ $reply->content }}</p>

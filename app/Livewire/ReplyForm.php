@@ -5,13 +5,15 @@ namespace App\Livewire;
 use App\Models\Reply;
 use App\Models\Review;
 use Livewire\Component;
+use Filament\Notifications\Notification;
 
 class ReplyForm extends Component
 {
     protected $listeners = ['refresh' => '$refresh'];
     public $review, $content, $state = false;
 
-    public function mount(Review $review){
+    public function mount(Review $review)
+    {
         $this->review = $review;
     }
 
@@ -25,15 +27,23 @@ class ReplyForm extends Component
         $this->validate([
             'content' => 'required|string',
         ]);
-        Reply::create([
+        $newReply = Reply::create([
             'review_id' => $this->review->id,
             'content' => $this->content,
         ]);
-        $this->content = '';
-        $this->state = !$this->state;
+        if ($newReply) {
+            $this->content = '';
+            $this->state = !$this->state;
+            Notification::make()
+                ->title('Reply Submitted')
+                // ->body('We have received your reply successfully.')
+                ->success()
+                ->send();
+        }
     }
 
-    public function showReplyForm(){
+    public function showReplyForm()
+    {
         $this->state = !$this->state;
     }
 }

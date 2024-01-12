@@ -71,14 +71,4 @@ class Tool extends Model implements HasMedia
         $average = $totalRating / ($reviews->count() * 5); // Assuming ratings are out of 5 for each category
         return round($average, 1);
     }
-
-    // public function averageRating()
-    // {
-    //     $ratings = $this->ratings()->pluck('rating')->toArray();
-    //     if (count($ratings) === 0) {
-    //         return 0;
-    //     }
-    //     $average = array_sum($ratings) / count($ratings);
-    //     return round($average, 1);
-    // }
 }

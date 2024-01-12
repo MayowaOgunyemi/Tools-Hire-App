@@ -182,7 +182,7 @@ class ListTools extends Component implements HasForms, HasTable
                     ->icon('heroicon-m-check')
                     ->requiresConfirmation()
                     ->visible(fn (Tool $record) => $record->status == 0)
-                    ->action(fn (Tool $record) => $record->update(['is_approved' => 1])),
+                    ->action(fn (Tool $record) => $record->update(['status' => 1])),
                 Action::make('reject')
                     ->color('danger')
                     ->icon('heroicon-m-x-mark')
