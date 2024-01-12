@@ -21,13 +21,7 @@ $logout = function (Logout $logout) {
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div> --}}
+                
                 @if (auth()->user()->role == 'admin')
                     
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -147,6 +141,36 @@ $logout = function (Logout $logout) {
                 <div class="font-medium text-base text-gray-800 dark:text-gray-200" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
                 <div class="font-medium text-sm text-gray-500">{{ auth()->user()->email }}</div>
             </div>
+            @if (auth()->user()->role == 'admin')
+                    
+                    <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('manage-users')" :active="request()->routeIs('manage-users')" wire:navigate>
+                            {{ __('Manage Users') }}
+                        </x-nav-link>
+                    </div>
+                    <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('manage-rentals')" :active="request()->routeIs('manage-rentals')" wire:navigate>
+                            {{ __('Manage Rentals') }}
+                        </x-nav-link>
+                    </div>
+                @endif
+                @if (auth()->user()->role == 'admin' || auth()->user()->role == 'moderator')
+                    <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('manage-tools')" :active="request()->routeIs('manage-tools')" wire:navigate>
+                            {{ __('Manage Tools') }}
+                        </x-nav-link>
+                    </div>
+                <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manage-reviews')" :active="request()->routeIs('manage-reviews')" wire:navigate>
+                        {{ __('Manage Reviews') }}
+                    </x-nav-link>
+                </div>
+                <div class="space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('manage-replies')" :active="request()->routeIs('manage-replies')" wire:navigate>
+                        {{ __('Manage Replies') }}
+                    </x-nav-link>
+                </div>
+                @endif
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('profile')" wire:navigate>
