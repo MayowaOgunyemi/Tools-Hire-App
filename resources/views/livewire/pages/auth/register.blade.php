@@ -25,7 +25,7 @@ rules([
     'name' => ['required', 'string', 'max:255'],
     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
     'username' => ['required', 'string', 'max:255', 'unique:'.User::class],
-    'password' => ['required', 'string', Rules\Password::defaults()],
+    'password' => ['required', 'string', 'min:8', Rules\Password::defaults()],
 ]);
 
 $register = function () {
