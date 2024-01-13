@@ -11,9 +11,7 @@ class AuthorizationTest extends TestCase
 {
 
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+   
     public function test_customer_cannot_access_admin_functionality(): void
     {
 
